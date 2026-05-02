@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Misuari Travel & Tours</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; color: #111827; background: #ffffff; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1180px; margin: auto; padding: 0 24px; }
+    header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); border-bottom: 1px solid #fed7aa; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(#fde047, #fb923c, #ef4444); color: white; display: grid; place-items: center; font-size: 28px; font-weight: 900; box-shadow: 0 8px 20px rgba(249,115,22,.25); }
+    .brand h1 { color: #f97316; letter-spacing: 8px; font-size: 26px; line-height: 1; }
+    .brand p { letter-spacing: 7px; font-size: 12px; font-weight: 800; margin-top: 5px; }
+    .menu { display: flex; align-items: center; gap: 28px; font-weight: 700; font-size: 14px; }
+    .btn { display: inline-block; background: #f97316; color: white; padding: 14px 24px; border-radius: 999px; font-weight: 900; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(249,115,22,.25); }
+    .btn.white { background: white; color: #ea580c; border: 1px solid #fdba74; box-shadow: none; }
+    .hero { position: relative; overflow: hidden; background: linear-gradient(135deg, #e0f2fe, #ffffff, #ffedd5); }
+    .hero:before { content: ""; position: absolute; right: 6%; top: 15%; width: 300px; height: 300px; background: rgba(253,224,71,.5); border-radius: 50%; filter: blur(60px); }
+    .hero:after { content: ""; position: absolute; left: -8%; bottom: -15%; width: 420px; height: 420px; background: rgba(251,146,60,.3); border-radius: 50%; filter: blur(70px); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; padding: 90px 0; }
+    .badge { display: inline-block; background: white; color: #ea580c; padding: 10px 18px; border-radius: 999px; font-weight: 900; box-shadow: 0 5px 16px rgba(0,0,0,.08); margin-bottom: 24px; }
+    .hero h2 { font-size: clamp(44px, 6vw, 76px); line-height: .98; font-weight: 900; letter-spacing: -2px; }
+    .hero h2 span { display: block; color: #f97316; }
+    .hero p { margin-top: 24px; max-width: 560px; font-size: 18px; line-height: 1.75; color: #475569; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px; }
+    .visual { background: white; border-radius: 34px; padding: 20px; box-shadow: 0 25px 70px rgba(15,23,42,.18); }
+    .visual-inner { min-height: 470px; border-radius: 26px; background: linear-gradient(#7dd3fc, #e0f2fe); padding: 40px 26px; text-align: center; position: relative; overflow: hidden; }
+    .plane { position: absolute; left: 34px; top: 30px; font-size: 54px; transform: rotate(-18deg); }
+    .sun-logo { width: 310px; height: 310px; border-radius: 50%; margin: 45px auto 0; background: linear-gradient(#fde047, #fb923c, #ef4444); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 0 0 40px rgba(0,0,0,.12); }
+    .sun-logo .m { font-size: 100px; font-weight: 900; line-height: .8; }
+    .sun-logo .name { margin-top: 16px; font-size: 26px; letter-spacing: 7px; font-weight: 900; }
+    .sun-logo .sub { margin-top: 8px; font-size: 12px; letter-spacing: 6px; font-weight: 900; }
+    .offer { margin-top: 30px; background: rgba(255,255,255,.88); border-radius: 18px; padding: 18px; text-align: left; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+    .offer small { color: #64748b; font-weight: 800; }
+    .offer h3 { color: #ea580c; font-size: 27px; margin-top: 4px; }
+    section { padding: 82px 0; }
+    .center { text-align: center; }
+    .eyebrow { color: #f97316; letter-spacing: 6px; text-transform: uppercase; font-weight: 900; font-size: 14px; }
+    .title { font-size: 42px; margin-top: 12px; font-weight: 900; }
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 42px; }
+    .card { border: 1px solid #ffedd5; border-radius: 28px; padding: 26px; background: white; box-shadow: 0 8px 22px rgba(0,0,0,.04); transition: .2s; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 18px 35px rgba(0,0,0,.1); }
+    .icon { width: 58px; height: 58px; border-radius: 18px; background: #ffedd5; display: grid; place-items: center; font-size: 30px; margin-bottom: 22px; }
+    .card h3 { font-size: 21px; margin-bottom: 12px; }
+    .card p { color: #64748b; line-height: 1.6; font-size: 15px; }
+    .dark { background: #020617; color: white; }
+    .dark .eyebrow { color: #fde047; }
+    .dark-top { display: flex; justify-content: space-between; align-items: end; gap: 30px; }
+    .dark-top p { max-width: 460px; color: #cbd5e1; line-height: 1.7; }
+    .promo-card { overflow: hidden; padding: 0; color: #111827; }
+    .promo-img { height: 170px; background: linear-gradient(135deg, #7dd3fc, #fef08a, #fb923c); display: grid; place-items: center; font-size: 58px; }
+    .promo-body { padding: 24px; }
+    .promo-body small { color: #ea580c; letter-spacing: 4px; text-transform: uppercase; font-weight: 900; }
+    .promo-body h3 { margin-top: 8px; min-height: 54px; }
+    .promo-body button { width: 100%; margin-top: 18px; background: #020617; color: white; padding: 14px; border-radius: 999px; border: none; font-weight: 900; }
+    .consult-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: stretch; }
+    .consult-box { border-radius: 34px; padding: 36px; background: linear-gradient(135deg, #f97316, #ef4444); color: white; box-shadow: 0 20px 50px rgba(239,68,68,.2); }
+    .consult-box .big { font-size: 52px; }
+    .consult-box h2 { font-size: 42px; margin-top: 24px; }
+    .consult-box p { margin-top: 18px; line-height: 1.75; color: #fff7ed; }
+    .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px; }
+    .chip { background: rgba(255,255,255,.16); border-radius: 18px; padding: 16px; font-weight: 800; }
+    .form-box { border: 1px solid #ffedd5; border-radius: 34px; padding: 36px; box-shadow: 0 20px 50px rgba(15,23,42,.08); }
+    .form-box h2 { font-size: 34px; margin-top: 10px; }
+    form { display: grid; gap: 14px; margin-top: 24px; }
+    input, select, textarea { width: 100%; border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px 18px; font: inherit; outline: none; }
+    textarea { min-height: 125px; resize: vertical; }
+    input:focus, select:focus, textarea:focus { border-color: #fb923c; }
+    footer { background: #020617; color: white; padding: 42px 0; }
+    .footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; align-items: center; }
+    .footer-brand { color: #fb923c; letter-spacing: 7px; font-size: 26px; font-weight: 900; }
+    .footer-sub { letter-spacing: 6px; font-size: 13px; font-weight: 900; margin-top: 4px; }
+    .footer-info { color: #cbd5e1; line-height: 2; }
+    .right { text-align: right; }
+    .msg { background: #22c55e; }
+    @media (max-width: 900px) {
+      .menu { display: none; }
+      .hero-grid, .consult-grid, .footer-grid { grid-template-columns: 1fr; }
+      .cards { grid-template-columns: 1fr 1fr; }
+      .right { text-align: left; }
+    }
+    @media (max-width: 560px) {
+      .cards { grid-template-columns: 1fr; }
+      .sun-logo { width: 250px; height: 250px; }
+      .brand h1 { font-size: 20px; letter-spacing: 5px; }
+      .title, .consult-box h2 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-icon">M</div>
+        <div>
+          <h1>MISUARI</h1>
+          <p>TRAVEL & TOURS</p>
+        </div>
+      </div>
+      <nav class="menu">
+        <a href="#services">Services</a>
+        <a href="#promos">Promos</a>
+        <a href="#consultation">Free Consultation</a>
+        <a href="#contact" class="btn">Inquire Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">Relax • Discover • Enjoy</div>
+          <h2>Travel the World <span>Travel with Misuari.</span></h2>
+          <p>A clean website mockup where customers can view promos, request quotations, and book a free consultation in one place.</p>
+          <div class="actions">
+            <a class="btn" href="#contact">Send Inquiry</a>
+            <a class="btn white" href="#consultation">Free Consultation</a>
+          </div>
+        </div>
+
+        <div class="visual">
+          <div class="visual-inner">
+            <div class="plane">✈</div>
+            <div class="sun-logo">
+              <div class="m">M</div>
+              <div class="name">MISUARI</div>
+              <div class="sub">TRAVEL & TOURS</div>
+            </div>
+            <div class="offer">
+              <small>Featured offer</small>
+              <h3>Explore your next destination</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container center">
+        <div class="eyebrow">Services</div>
+        <h2 class="title">Everything customers need in one place</h2>
+        <div class="cards">
+          <div class="card"><div class="icon">✈</div><h3>International Flights</h3><p>Flight assistance for your next trip abroad.</p></div>
+          <div class="card"><div class="icon">🎫</div><h3>Domestic Flights</h3><p>Easy booking for local destinations around the Philippines.</p></div>
+          <div class="card"><div class="icon">🏨</div><h3>Hotel Booking</h3><p>Stay options that fit your travel plan and budget.</p></div>
+          <div class="card"><div class="icon">🌍</div><h3>Travel Packages</h3><p>Promos and offers arranged in one clean place.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="promos" class="dark">
+      <div class="container">
+        <div class="dark-top">
+          <div>
+            <div class="eyebrow">Featured Promos</div>
+            <h2 class="title">Sample travel offers</h2>
+          </div>
+          <p>Each promo can open a separate page with inclusions, requirements, rates, and an inquiry button.</p>
+        </div>
+        <div class="cards">
+          <div class="card promo-card"><div class="promo-img">🏝</div><div class="promo-body"><small>Promo 1</small><h3>Philippines Local Tours</h3><button>View Promo</button></div></div>
+          <div class="card promo-card"><div class="promo-img">✈</div><div class="promo-body"><small>Promo 2</small><h3>Asia Getaways</h3><button>View Promo</button></div></div>
+          <div class="card promo-card"><div class="promo-img">👨‍👩‍👧‍👦</div><div class="promo-body"><small>Promo 3</small><h3>Family Vacation Packages</h3><button>View Promo</button></div></div>
+          <div class="card promo-card"><div class="promo-img">🏨</div><div class="promo-body"><small>Promo 4</small><h3>Flight + Hotel Deals</h3><button>View Promo</button></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="consultation">
+      <div class="container consult-grid">
+        <div class="consult-box">
+          <div class="big">📅</div>
+          <h2>Free Travel Consultation</h2>
+          <p>Not sure where to go or what package fits your budget? Send your preferred destination, date, and number of travelers so Misuari can prepare options for you.</p>
+          <div class="chips">
+            <div class="chip">Flight options</div>
+            <div class="chip">Hotel suggestions</div>
+            <div class="chip">Promo matching</div>
+            <div class="chip">Quotation request</div>
+          </div>
+        </div>
+
+        <div id="contact" class="form-box">
+          <div class="eyebrow">Contact Form</div>
+          <h2>Get your quotation</h2>
+          <form name="misuari-inquiry" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="misuari-inquiry" />
+            <input name="name" placeholder="Full Name" required />
+            <input name="contact" placeholder="Contact Number" required />
+            <input name="email" type="email" placeholder="Email Address" />
+            <select name="service" required>
+              <option value="">Promo or Service Interested In</option>
+              <option>International Flights</option>
+              <option>Domestic Flights</option>
+              <option>Hotel Booking</option>
+              <option>Travel Package</option>
+            </select>
+            <textarea name="message" placeholder="Preferred destination, travel date, number of pax, and budget"></textarea>
+            <button class="btn" type="submit">Submit Inquiry</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">MISUARI</div>
+        <div class="footer-sub">TRAVEL & TOURS</div>
+        <p style="margin-top:14px;color:#cbd5e1;">Travel the World. Travel with Misuari.</p>
+      </div>
+      <div class="footer-info">
+        <p>📞 Contact number here</p>
+        <p>✉ email@misuaritravel.com</p>
+        <p>📍 Office address here</p>
+      </div>
+      <div class="right">
+        <a class="btn msg" href="#contact">Message Us</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
